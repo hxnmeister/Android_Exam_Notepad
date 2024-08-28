@@ -1,7 +1,9 @@
 package com.ua.project.android_exam_notepad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,25 +26,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
 
-        binding.saveNoteButton.setOnClickListener(v -> {
-            try (DBHelper dbHelper = new DBHelper(MainActivity.this)) {
-                String noteText = binding.noteMainTextEditText.getText().toString();
-                String noteTitle = binding.noteTitleEditText.getText().toString();
-
-                if(!dbHelper.doesTableExist()) {
-                    dbHelper.createTable();
-                }
-
-                if(noteText.isEmpty()) {
-                    Toast.makeText(MainActivity.this, R.string.empty_main_text, Toast.LENGTH_LONG).show();
-                }
-                else {
-                    dbHelper.insert(Note.builder().title(noteTitle).text(noteText).build());
-                }
-            }
-            catch (Exception e) {
-                Log.e("TAG", "onCreate: ", e);
-            }
+        binding.saveNoteButton.setOnClickListener(this::saveNote);
+        binding.getAllNotesButton.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, NotesActivity.class));
         });
+    }
+
+    private void saveNote(View view) {
+        try (DBHelper dbHelper = new DBHelper(MainActivity.this)) {
+            String noteText = binding.noteMainTextEditText.getText().toString();
+            String noteTitle = binding.noteTitleEditText.getText().toString();
+
+            if(!dbHelper.doesTableExist()) {
+                dbHelper.createTable();
+            }
+
+            if(noteText.isEmpty()) {
+                Toast.makeText(MainActivity.this, R.string.empty_main_text, Toast.LENGTH_LONG).show();
+            }
+            else {
+                dbHelper.insert(Note.builder().title(noteTitle).text(noteText).build());
+            }
+        }
+        catch (Exception e) {
+            Log.e("TAG", "onCreate: ", e);
+        }
     }
 }

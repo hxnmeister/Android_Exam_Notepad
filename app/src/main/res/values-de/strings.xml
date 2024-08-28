@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android_Exam_Notepad</string>
+    <string name="save_note_btn">Speichern</string>
+    <string name="all_notes_btn">Meine Notizen</string>
+    <string name="title_text_hint">Titel</string>
+    <string name="main_text_ed_ml_hint">Geben Sie hier Ihre Notiz ein …</string>
+    <string name="empty_main_text">Der Zettel ist leer!</string>
+</resources>

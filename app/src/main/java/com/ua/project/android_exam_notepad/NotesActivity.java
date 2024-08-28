@@ -16,17 +16,16 @@ import com.ua.project.android_exam_notepad.databinding.ActivityNotesBinding;
 
 public class NotesActivity extends AppCompatActivity {
     private ActivityNotesBinding binding;
-    private DBHelper dbHelper = new DBHelper(NotesActivity.this);
-    private NoteAdapter noteAdapter;
+    private final DBHelper dbHelper = new DBHelper(NotesActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NoteAdapter noteAdapter = new NoteAdapter(dbHelper.findAll(),NotesActivity.this);
         binding = ActivityNotesBinding.inflate(getLayoutInflater());
 
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
 
-        noteAdapter = new NoteAdapter(NotesActivity.this, dbHelper.findAll());
         binding.notesRecyclerView.setAdapter(noteAdapter);
         binding.notesRecyclerView.setLayoutManager(new LinearLayoutManager(NotesActivity.this, RecyclerView.VERTICAL, false));
     }

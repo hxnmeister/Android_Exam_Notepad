@@ -16,14 +16,12 @@ import com.ua.project.android_exam_notepad.models.Note;
 
 import java.util.List;
 
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
-    private List<Note> noteList;
-    private final Activity activity;
+import lombok.RequiredArgsConstructor;
 
-    public NoteAdapter(Activity activity, List<Note> notes) {
-        this.activity = activity;
-        this.noteList = notes;
-    }
+@RequiredArgsConstructor
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
+    private final List<Note> noteList;
+    private final Activity activity;
 
     public class NoteHolder extends RecyclerView.ViewHolder {
         private Integer id;

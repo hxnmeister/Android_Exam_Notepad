@@ -21,23 +21,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-
         Intent intent = getIntent();
         Note currentNote = (Note) intent.getSerializableExtra("current_note");
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        super.onCreate(savedInstanceState);
+        setContentView(binding.getRoot());
 
         if(currentNote != null) {
             binding.noteTitleEditText.setText(currentNote.getTitle());
             binding.noteMainTextEditText.setText(currentNote.getText());
         }
 
-        super.onCreate(savedInstanceState);
-        setContentView(binding.getRoot());
-
         binding.saveNoteButton.setOnClickListener(this::saveNote);
-        binding.getAllNotesButton.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, NotesActivity.class));
-        });
+        binding.getAllNotesButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NotesActivity.class)));
     }
 
     private void saveNote(View view) {

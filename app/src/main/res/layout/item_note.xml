@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:backgroundTint="#000000"
-    android:orientation="vertical">
+    android:background="@drawable/item_note_border"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/titleTextView"

@@ -23,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
+        Intent intent = getIntent();
+        Note currentNote = (Note) intent.getSerializableExtra("current_note");
+
+        if(currentNote != null) {
+            binding.noteTitleEditText.setText(currentNote.getTitle());
+            binding.noteMainTextEditText.setText(currentNote.getText());
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
 
@@ -46,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 dbHelper.insert(Note.builder().title(noteTitle).text(noteText).build());
+
+                binding.noteTitleEditText.setText("");
+                binding.noteMainTextEditText.setText("");
             }
         }
         catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.ua.project.android_exam_notepad.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ua.project.android_exam_notepad.MainActivity;
 import com.ua.project.android_exam_notepad.R;
 import com.ua.project.android_exam_notepad.models.Note;
 
@@ -50,6 +52,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         holder.noteTitle.setText(note.getTitle());
         holder.noteText.setText(note.getText());
         holder.id = note.getId();
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, MainActivity.class);
+            intent.putExtra("current_note", note);
+
+            activity.startActivity(intent);
+            activity.finish();
+        });
     }
 
     @Override

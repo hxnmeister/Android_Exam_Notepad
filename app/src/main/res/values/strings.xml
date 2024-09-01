@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Android_Exam_Notepad</string>
+    <string name="app_name">Notepad</string>
 
     <string name="save_note_btn">Save</string>
     <string name="all_notes_btn">My Notes</string>
